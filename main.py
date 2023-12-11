@@ -1,16 +1,15 @@
-import pickle
-#створення об'єкту для серефлізації
-data = {"name": "Valera", "age": 30, "city": "New York"}
-#сереалізація об'єкта в байтовий потік
-serialized_data = pickle.dumps(data) #перегляд
-print(serialized_data)
-#через контекстний менеджер
-with open("serialized_data.pickle", "wb") as file:
-    pickle.dump(data, file)
-#десеріалізація
-deserialized_data = pickle.loads(serialized_data)
-print(deserialized_data)
-#через контекстний менеджер
-with open("serialized_data.pickle", "rb") as file:
-    deserialized_data_file = pickle.load(file)
-print(deserialized_data_file)
+#приклад сиснення інформації
+import gzip
+with gzip.open('compressed_file.gz', "wb") as file:
+    file.write(b"some text")
+#ще один із видів стискання
+data = b"some text"
+compressed_data = gzip.compress(data)
+print(compressed_data)
+#розпакування стиснених данних
+decompressed_data = gzip.decompress(compressed_data)
+print(decompressed_data)
+#розпакування і файлу
+with gzip.open('compressed_file.gz', "rb") as file:
+    new_data = file.read()
+print(new_data)
